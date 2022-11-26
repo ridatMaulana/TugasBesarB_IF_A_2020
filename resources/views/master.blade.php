@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
+    {{-- <link rel="stylesheet" href="sweetalert2.min.css"> --}}
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -36,6 +37,30 @@
     <script src="{{ asset('assets') }}/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets') }}/dist/js/demo.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="sweetalert2.min.js"></script> --}}
+    <script>
+        // Swal.bindClickHandler()
+
+        // Swal.mixin({
+        // toast: true,
+        // }).bindClickHandler('data-swal-toast-template')
+
+        function logout() {
+            Swal.fire({
+                template: '#logout',
+            }).then((result)=>{
+                if (result.isConfirmed) {
+                    window.location = "{{ route('logout') }}"
+                    // $.ajax({
+                    //     type: 'get',
+                    //     url: "",
+                    // })
+                }
+            })
+        }
+
+    </script>
 </body>
 
 </html>

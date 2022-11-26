@@ -12,6 +12,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->intended('dashboard');
+        }
         return view('auth.login');
     }
 
@@ -32,35 +35,35 @@ class LoginController extends Controller
         ]);
     }
 
-    public function register()
-    {
-        return view('auth.register');
-    }
+    // public function register()
+    // {
+    //     return view('auth.register');
+    // }
 
-    public function daftar(Request $request)
-    {
-        $input = $request->all();
-        $user = User::create([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => bcrypt($input['password'])
-            ]);
+    // public function daftar(Request $request)
+    // {
+    //     $input = $request->all();
+    //     $user = User::create([
+    //             'name' => $input['name'],
+    //             'email' => $input['email'],
+    //             'password' => bcrypt($input['password'])
+    //         ]);
 
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'name' => ['required'],
-                'password' => ['required'],
-            ]);
-    
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect()->intended('dashboard');
-            }
+    //         $credentials = $request->validate([
+    //             'email' => ['required', 'email'],
+    //             'name' => ['required'],
+    //             'password' => ['required'],
+    //         ]);
 
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ]);
-    }
+    //         if (Auth::attempt($credentials)) {
+    //             $request->session()->regenerate();
+    //             return redirect()->intended('dashboard');
+    //         }
+
+    //         return back()->withErrors([
+    //             'email' => 'The provided credentials do not match our records.',
+    //         ]);
+    // }
 
     public function logout()
     {

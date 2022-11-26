@@ -20,10 +20,10 @@ Route::get('/', function () {
 });
 
 Route::get('/login' ,[LoginController::class,'index']);
-Route::get('/logout' ,[LoginController::class,'logout']);
+Route::get('/logout' ,[LoginController::class,'logout'])->name('logout');
 Route::post('/login' ,[LoginController::class,'Login'])->name('login');
-Route::get('/register' ,[LoginController::class,'register']);
-Route::post('/register' ,[LoginController::class,'daftar']);
+// Route::get('/register' ,[LoginController::class,'register']);
+// Route::post('/register' ,[LoginController::class,'daftar']);
 
 Route::get('/dashboard',[HomeController::class,'index']);
 

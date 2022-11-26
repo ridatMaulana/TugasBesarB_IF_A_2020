@@ -72,13 +72,13 @@
                                             <!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
                                         </div>
                                     </form>
-                                    <div class="text-center mt-3">
+                                    {{-- <div class="text-center mt-3">
                                         <h2>OR</h2>
                                     </div>
                                     <div class="text-center mt-3">
                                         <a href="{{ url('/register') }}"
                                             class="btn btn-lg btn-success">Register</a>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
