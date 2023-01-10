@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePasiensTable extends Migration
+class CreateIcdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreatePasiensTable extends Migration
      */
     public function up()
     {
-        Schema::create('pasiens', function (Blueprint $table) {
+        Schema::create('icds', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->date('tanggal_lahir');
-            $table->string('alamat');
-            $table->string('agama');
-            $table->string('nama_ibu');
-            $table->string('jenis kelamin');
-            $table->date('tanggal_daftar');
+            $table->string('nama_diagnosa');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreatePasiensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pasiens');
+        Schema::dropIfExists('icds');
     }
 }
