@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRekammedissTable extends Migration
+class CreateRekammedisesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateRekammedissTable extends Migration
      */
     public function up()
     {
-        Schema::create('rekammediss', function (Blueprint $table) {
+        Schema::create('rekammedises', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pasien')->constrained();
-            $table->foreignId('id_karyawan')->constrained();
+            $table->foreignId('pasiens_id')->constrained();
+            $table->foreignId('karyawans_id')->constrained();
             $table->string('kode_icd');
             $table->string('keluhan');
             $table->datetime('tanggal_dibuat');
             $table->string('tensi');
-            $table->string('alergi'); 
+            $table->string('alergi');
             $table->string('hasil_lab');
             $table->timestamps();
         });
@@ -34,6 +34,6 @@ class CreateRekammedissTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekammediss');
+        Schema::dropIfExists('rekammedises');
     }
 }

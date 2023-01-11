@@ -15,10 +15,10 @@ class CreateDetailtindakansTable extends Migration
     {
         Schema::create('detailtindakans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_rekam_medis')->constrained();
-            $table->foreignId('id_tindakan')->constrained();
+            $table->foreignId('rekammedises_id')->constrained();
+            $table->foreignId('tindakans_id')->constrained();
             $table->string('kode_pasien');
-            $table->string('keterangan'); 
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

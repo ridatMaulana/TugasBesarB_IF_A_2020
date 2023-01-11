@@ -15,10 +15,10 @@ class CreateDetailobatsTable extends Migration
     {
         Schema::create('detailobats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_rekam_medis')->constrained();
-            $table->foreignId('id_obat')->constrained();
+            $table->foreignId('rekammedises_id')->constrained();
+            $table->foreignId('obats_id')->constrained();
             $table->string('kode_pasien');
-            $table->string('dosis'); 
+            $table->string('dosis');
             $table->timestamps();
         });
     }

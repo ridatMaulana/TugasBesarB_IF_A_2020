@@ -15,11 +15,11 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pasien')->constrained();
-            $table->foreignId('id_karyawan')->constrained();
-            $table->foreignId('id_obat')->constrained();
-            $table->foreignId('id_tindakan')->constrained();
-            $table->foreignId('id_rekam_medis')->constrained();
+            $table->foreignId('pasiens_id')->constrained();
+            $table->foreignId('karyawans_id')->constrained();
+            $table->foreignId('obats_id')->constrained();
+            $table->foreignId('tindakans_id')->constrained();
+            $table->foreignId('rekammedises_id')->constrained();
             $table->string('no_antrian');
             $table->string('tanggal_transaksi');
             $table->integer('total_biaya');
