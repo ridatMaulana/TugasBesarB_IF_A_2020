@@ -133,13 +133,13 @@
                             <label for="jk">Jenis Kelamin</label>
                             <div>
                                 <div class="form-check form-check-inline" id="jk">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki" value="Laki-laki">
                                     <label class="form-check-label" for="laki">
                                         Laki-laki
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="pr">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="pr" value="Perempuan">
                                     <label class="form-check-label" for="pr">
                                         Perempuan
                                     </label>
