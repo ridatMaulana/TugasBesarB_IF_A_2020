@@ -1,4 +1,5 @@
 @extends('master');
+@section('title',"Home");
 <!-- Content Wrapper. Contains page content -->
 @section('content');
 <div class="content-wrapper">

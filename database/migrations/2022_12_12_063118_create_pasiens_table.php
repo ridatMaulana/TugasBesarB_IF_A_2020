@@ -20,7 +20,7 @@ class CreatePasiensTable extends Migration
             $table->string('alamat');
             $table->string('agama');
             $table->string('nama_ibu');
-            $table->string('jenis kelamin');
+            $table->string('jenis_kelamin');
             $table->date('tanggal_daftar');
             $table->timestamps();
         });

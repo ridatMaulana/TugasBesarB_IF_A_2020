@@ -90,8 +90,19 @@
         </div>
     </main>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('resources') }}/js/app.js"></script>
-
+    <script>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            Swal.fire({
+                icon: 'error',
+                title: "Ooops",
+                text: "{{ $error }}",
+            })
+        @endforeach
+    @endif
+    </script>
 </body>
 
 </html>

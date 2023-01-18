@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -28,7 +28,19 @@
         @include('templates.footer')
     </div>
     <!-- ./wrapper -->
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                Swal.fire({
+                    icon: 'error',
+                    title: "Ooops",
+                    text: "{{ $error }}",
+                })
+            @endforeach
+        @endif
+        </script>
+        @stack('js')
     <!-- jQuery -->
     <script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->

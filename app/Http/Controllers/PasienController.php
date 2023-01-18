@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-
+use Carbon\Carbon;
 use App\Models\Pasien;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PasienExport;
 use App\Imports\PasiensImport;
 
-class AdminController extends Controller
+class PasienController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -36,6 +36,8 @@ class AdminController extends Controller
             'nama' => 'required|max:255',
             'tanggal_lahir' =>'required',
             'alamat' =>'required',
+            'agama' =>'required',
+            'nama_ibu' =>'required|max:255',
             'jenis_kelamin' => 'required',
         ]);
 
@@ -43,8 +45,10 @@ class AdminController extends Controller
         $pasien->nama = $req->get('nama');
         $pasien->tanggal_lahir = $req->get('tanggal_lahir');
         $pasien->alamat = $req->get('alamat');
+        $pasien->agama = $req->get('agama');
+        $pasien->nama_ibu = $req->get('nama_ibu');
+        $pasien->tanggal_daftar = Carbon::now();
         $pasien->jenis_kelamin = $req->get('jenis_kelamin');
-     
 
         $pasien->save();
 
@@ -52,9 +56,9 @@ class AdminController extends Controller
             'message' => 'Data Pasien Berhasil Ditambahkan',
             'alert-type' => 'success'
         );
-    
-        return redirect()->route('admin.pasiens')->with($notification);
-    }    
+
+        return redirect()->route('admin.pasien')->with($notification);
+    }
 
     //AJAX PROCESS
     public function getDataPasien($id){
@@ -89,7 +93,7 @@ class AdminController extends Controller
     }
 
     public function delete_pasien($id){
-        
+
         $pasien = Pasien::find($id);
 
         $pasien->delete();
@@ -117,7 +121,7 @@ class AdminController extends Controller
     public function import(Request $req)
     {
         Excel::import(new PasiensImport, $req->file('file'));
-        
+
         $notification = array(
             'message' => 'Import Data Berhasil Dilakukan',
             'alert-type' => 'success'
