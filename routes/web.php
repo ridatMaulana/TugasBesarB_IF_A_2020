@@ -45,6 +45,16 @@ Route::post('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasien'
 ->name('admin.pasien.delete');
 // ->middleware('is_admin');
 
+//crud tindakan 
+Route::get('/tambah_tindakan', [TindakanController::class, 'tambah_tindakan'])->middleware('admin');
+Route::post('/store_tindakan', [TindakanController::class, 'store_tindakan'])->middleware('admin');
+Route::post('/hapus_tindakan', [TindakanController::class, 'hapus_tindakan'])->middleware('admin');
+Route::get('/edit_tindakan/{id}', [TindakanController::class, 'edit_tindakan'])->middleware('admin');
+Route::post('/update_tindakan', [TindakanController::class, 'update_tindakan'])->middleware('admin');
+Route::post('/cari_tindakan', [TindakanController::class, 'cari_tindakan']);
+
+
+
 
 // Route::get('/dashboard', function () {
 //     return view('home');
