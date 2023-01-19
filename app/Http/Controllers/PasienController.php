@@ -94,7 +94,7 @@ class PasienController extends Controller
 
     public function delete_pasien($id){
 
-        $pasien = Pasien::find($id);
+        $pasien = Pasien::findOrFail($id);
 
         $pasien->delete();
 

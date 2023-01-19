@@ -40,10 +40,10 @@ Route::get('admin/pasiens/update',[PasienController::class,'update_pasien'])
 ->name('admin.pasien.update');
 // ->middleware('is_admin');
 
-Route::get('admin/ajaxadmin/dataPasien',[PasienController::class,'getDataPasien']);
+Route::get('admin/ajaxadmin/dataPasien/{id}',[PasienController::class,'getDataPasien']);
 
-Route::post('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasien'])
-->name('admin.pasien.delete');
+Route::delete('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasien'])
+->name('pasien.delete');
 // ->middleware('is_admin');
 
 Route::get('admin/print_pasiens',[PasienController::class,'print_pasiens'])

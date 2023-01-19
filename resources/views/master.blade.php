@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -43,6 +44,9 @@
         @stack('js')
     <!-- jQuery -->
     <script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.3.js" type="text/javascript"></script> --}}
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
@@ -53,7 +57,66 @@
     {{-- <script src="sweetalert2.min.js"></script> --}}
     <script>
         // Swal.bindClickHandler()
+        const Toast = Swal.mixin({
+            Toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+        })
 
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type') }}";
+            switch(type){
+                case 'info' :
+                    Toast.fire({
+                        icon: 'info',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'warning' :
+                    Toast.fire({
+                        icon: 'warning',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'success' :
+                    Toast.fire({
+                        icon: 'success',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'error' :
+                    Toast.fire({
+                        icon: 'error',
+                        title: "{{ Session::get('message') }}"
+                    })
+                    break;
+
+                case 'error_dialog' :
+                    Toast.fire({
+                        icon: 'error',
+                        title: "Ooops",
+                        text: "{{ Session::get('message') }}",
+                        timer: 3000,
+                    })
+                    break;
+            }
+            @endif
+
+            @if($errors->any())
+                @foreach($errors->all() as $error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Ooops",
+                        text: "{{ $error }}",
+                    })
+                @endforeach
+            @endif
+
+            // $('#table-data').DataTable();
         // Swal.mixin({
         // toast: true,
         // }).bindClickHandler('data-swal-toast-template')

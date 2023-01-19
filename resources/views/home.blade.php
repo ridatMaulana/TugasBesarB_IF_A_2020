@@ -1,7 +1,7 @@
-@extends('master');
-@section('title',"Home");
+@extends('master')
+@section('title',"Home")
 <!-- Content Wrapper. Contains page content -->
-@section('content');
+@section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
