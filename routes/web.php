@@ -35,6 +35,7 @@ Route::post('admin/pasien',[PasienController::class,'submit_pasien'])
 ->name('admin.pasien.submit');
 // ->middleware('is_admin');
 
+
 Route::get('admin/pasiens/update',[PasienController::class,'update_pasien'])
 ->name('admin.pasien.update');
 // ->middleware('is_admin');
@@ -44,6 +45,16 @@ Route::get('admin/ajaxadmin/dataPasien',[PasienController::class,'getDataPasien'
 Route::post('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasien'])
 ->name('admin.pasien.delete');
 // ->middleware('is_admin');
+
+Route::get('admin/print_pasiens',[PasienController::class,'print_pasiens'])
+->name('admin.print.pasiens')
+->middleware('is_admin');
+
+Route::get('admin/books/export',[PasienController::class,'export'])
+->name('admin.print.export')
+->middleware('is_admin');
+
+
 
 //crud tindakan 
 Route::get('/tambah_tindakan', [TindakanController::class, 'tambah_tindakan'])->middleware('admin');
