@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class PasiensSeeder extends Seeder
+class KaryawansSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,14 @@ class PasiensSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID');
+        $faker = Faker::create('en_US');
         for($i=1; $i<=20; $i++){
-            DB::table('pasiens')->insert([
+            DB::table('karyawans')->insert([
                 'nama' => $faker->name,
-                'tanggal_lahir' => $faker->date($format = 'Y-m-d', $max = 'now'),
                 'alamat' => $faker->city,
-                'agama' => $faker->name,
-                'nama_ibu' => $faker->name,
-                'jenis_kelamin' => $faker->name,
-                'tanggal_daftar' => $faker->date($format = 'Y-m-d', $max = 'now'),
+                'no_telepon' => $faker->unixTime($max = 'now'),
+                'jabatan' => $faker->jobTitle,
+                'spesialis' => $faker->jobTitle,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
                 ]);
