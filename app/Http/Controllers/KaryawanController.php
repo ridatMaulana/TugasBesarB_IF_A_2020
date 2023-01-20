@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
 use App\Models\Karyawan;
+use App\Models\User;
 use App\Models\Spesialis;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
@@ -47,9 +48,24 @@ class KaryawanController extends Controller
         $karyawan->alamat = $req->get('alamat');
         $karyawan->no_telepon = $req->get('no_telepon');
         $karyawan->jabatan = $req->get('jabatan');
-        $karyawan->spesialis_id =  $req->get('spesialis');
+        $karyawan->spesialis_id = $req->get('spesialis');
 
         $karyawan->save();
+
+
+
+        if ($req->get('spesialis') == 2) {
+            $karyawans = Karyawan::all()->last();
+            $user = new User;
+            $user->name = $req->get('nama');
+            $user->username = $req->get('nama')."12345";
+            $user->password = bcrypt("12345678");
+            $user->roles_id = 2;
+            $user->karyawans_id = $karyawans->id;
+            $user->email = $req->get('nama')."@mail.com";
+
+            $user->save();
+        }
 
         $notification = array(
             'message' => 'Data karyawan Berhasil Ditambahkan',
