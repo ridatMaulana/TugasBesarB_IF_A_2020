@@ -71,16 +71,19 @@ class PasienController extends Controller
 
         $validate = $req->validate([
             'nama' => 'required|max:255',
-            'tanggal_lahir' => 'required',
-            'alamat' => 'required',
+            'tanggal_lahir' =>'required',
+            'alamat' =>'required',
+            'agama' =>'required',
+            'nama_ibu' =>'required|max:255',
             'jenis_kelamin' => 'required',
         ]);
 
         $pasien->nama = $req->get('nama');
         $pasien->tanggal_lahir = $req->get('tanggal_lahir');
         $pasien->alamat = $req->get('alamat');
+        $pasien->agama = $req->get('agama');
+        $pasien->nama_ibu = $req->get('nama_ibu');
         $pasien->jenis_kelamin = $req->get('jenis_kelamin');
-
 
         $pasien->save();
 
@@ -89,7 +92,7 @@ class PasienController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('admin.pasiens')->with($notification);
+        return redirect()->route('admin.pasien')->with($notification);
     }
 
     public function delete_pasien($id){

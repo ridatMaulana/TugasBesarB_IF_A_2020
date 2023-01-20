@@ -58,7 +58,7 @@
     <script>
         // Swal.bindClickHandler()
         const Toast = Swal.mixin({
-            Toast: true,
+            toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,

@@ -35,7 +35,7 @@ Route::post('admin/pasien',[PasienController::class,'submit_pasien'])
 ->name('admin.pasien.submit');
 // ->middleware('is_admin');
 
-Route::get('admin/pasiens/update',[PasienController::class,'update_pasien'])
+Route::patch('admin/pasiens/update',[PasienController::class,'update_pasien'])
 ->name('admin.pasien.update');
 // ->middleware('is_admin');
 
@@ -45,7 +45,7 @@ Route::delete('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasie
 ->name('pasien.delete');
 // ->middleware('is_admin');
 
-//crud tindakan 
+//crud tindakan
 Route::get('/tambah_tindakan', [TindakanController::class, 'tambah_tindakan'])->middleware('admin');
 Route::post('/store_tindakan', [TindakanController::class, 'store_tindakan'])->middleware('admin');
 Route::post('/hapus_tindakan', [TindakanController::class, 'hapus_tindakan'])->middleware('admin');

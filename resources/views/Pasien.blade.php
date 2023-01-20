@@ -55,7 +55,7 @@
                                     <td>{{ $pasien->tanggal_lahir }}</td>
                                     <td>{{ $pasien->tanggal_daftar }}</td>
                                     <td>
-                                        <button class="btn btn-warning" id="edit-pasien" data-toggle="modal" data-target="#editPasien" data-id="{{ $pasien->id }}" onclick="edit()">
+                                        <button class="btn btn-warning" id="edit-pasien" data-toggle="modal" data-target="#editPasien" onclick="edit({{ $pasien->id }})">
                                             <i class="fa fa-pencil-alt"></i>
                                         </button>
                                         <button type="button" title="Hapus Pasien" class="btn btn-danger"
@@ -151,6 +151,7 @@
                 <div class="modal-body">
                     <form action="{{ route('admin.pasien.update') }}" method="post">
                         @csrf
+                        @method("PATCH")
                         <div class="form-group">
                             <label for="nama">Nama Pasien</label>
                             <input type="text" class="form-control" name="nama" id="edit-nama" required>
@@ -199,6 +200,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="id" id="edit-id">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Kirim</button>
                         </div>
@@ -211,9 +213,8 @@
 @stop
     @push('js')
         <script>
-            function edit() {
+            function edit(id) {
                     var edit = document.getElementById("edit-pasien");
-                    let id = edit.getAttribute('data-id');
                     $('#image-area').empty();
                     $.ajax({
                         type: "get",
@@ -223,12 +224,11 @@
                             $('#edit-nama').val(res.nama);
                             $('#edit-tanggal_lahir').val(res.tanggal_lahir);
                             $('#edit-alamat').val(res.alamat);
-                            if (res.jenis_kelamin == "laki-laki") {
-                                $('#edit-laki').checked = true;
+                            if (res.jenis_kelamin == "Laki-laki") {
+                                $('#edit-laki').attr('checked', 'checked');
                             } else {
-                                $('#edit-pr').checked = true;
+                                $('#edit-pr').attr('checked', 'checked');
                             }
-                            $('#edit-jenis_kelamin').val(res.jenis_kelamin);
                             $('#edit-nama_ibu').val(res.nama_ibu);
                             $('#edit-agama').val(res.agama);
                             $('#edit-id').val(res.id);
