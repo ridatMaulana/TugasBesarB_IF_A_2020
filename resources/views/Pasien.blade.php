@@ -243,7 +243,7 @@
                 swal.fire({
                     title: "Hapus??",
                     icon: 'warning',
-                    text: "Apakah anda yakin ingin menghapus data dengan judul " + judul + "?!",
+                    text: "Apakah anda yakin ingin menghapus data dengan nama " + judul + "?!",
                     showCancelButton: !0,
                     confirmButtonText: "Ya, lakukan!!",
                     cancelButtonText: "Tidak, Batalkan!!",

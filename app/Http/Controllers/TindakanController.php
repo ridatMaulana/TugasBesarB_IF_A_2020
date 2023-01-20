@@ -8,71 +8,73 @@ use Illuminate\Http\RedirectResponse;
 //database
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Tindakan;
 
 class TindakanController extends Controller
 {
-    public function tambah_tindakan(){
-        return view('admin.tambah_tindakan');
+    public function index()
+    {
+        $data['tindakans'] = Tindakan::all();
+        return view('admin.data_tindakan')->with($data);
     }
-    
+
+    // public function tambah_tindakan(){
+    //     return view('admin.tambah_tindakan');
+    // }
+
     public function store_tindakan(Request $request){
-        
+
         $request->validate([
-            'pasien' => 'required|string',
-            'tindakan' => 'required'
+            'nama_tindakan' => 'required',
+            'harga_tindakan' => 'required|numeric'
             ]);
-            
+
         //cek pasien apakah ada di database
-        $pasien = DB::table('pasiens')->where('nama', $request->pasiens)->first();
-        
-        if($pasiens == null){
-            return redirect('/tambah_tindakan')->with('pasiens', 'Nama pasien belum terdaftar');
-        }
-            
-        $save = DB::table('tindakans')->insert([
-            'id_pasien' => $pasiens->id,
-            'nama_tindakan' => $request->tindakans,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-            ]);
-            
-            if($save){
-                return redirect('/data_tindakan')->with('sukses', 'Data berhasil ditambahkan');
-            }
+        $tindakan = new Tindakan;
+        $tindakan->nama_tindakan = $request->get('nama_tindakan');
+        $tindakan->harga_tindakan = $request->get('harga_tindakan');
+        $tindakan->save();
+
+        $notification = array(
+            'message' => 'Data tindakan Berhasil Ditambahkan',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.tindakan')->with($notification);
     }
-    
+
     public function hapus_tindakan(Request $request){
         $id = $request->id;
-        DB::table('tindakans')->delete($id);
-        return redirect('/data_tindakan')->with('hapus', 'Data tindakan berhasil dihapus');
+        $tindakan = Tindakan::findOrFail($id);
+        $tindakan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data tindakan Berhasil Dihapus',
+        ]);
     }
-    
-    public function edit_tindakan($id){
-        $datas = DB::table('tindakans')->find($id);
-        $pasiens = DB::table('pasiens')->find($datas->id_pasien);
-        return view('admin.edit_tindakan', ['data' => $datas, 'pasien' => $pasiens->nama]);
-    }
-    
-    public function update_tindakan(Request $request){
-    
-        $request->validate([
-            'pasiens' => 'required',
-            'tindakans' => 'required'
-            ]);
-        
-        $pasien = DB::table('pasiens')->where('nama', $request->pasiens)->first();
 
-        DB::table('tindakan')->where('id', $request->id)->update([
-            'id_pasien' => $pasien->id,
-            'nama_tindakan' => $request->tindakan,
-            'updated_at' => date('Y-m-d H:i:s')
+    public function update_tindakan(Request $request){
+        $id = $request->id;
+        $tindakan = Tindakan::findOrFail($id);
+
+        $request->validate([
+            'nama_tindakan' => 'required',
+            'harga_tindakan' => 'required|numeric'
             ]);
-        
-        return redirect('/data_tindakan')->with('update', 'Data tindakan berhasil diupdate');
+
+        $tindakan->nama_tindakan = $request->get('nama_tindakan');
+        $tindakan->harga_tindakan = $request->get('harga_tindakan');
+        $tindakan->save();
+        $notification = array(
+            'message' => 'Data tindakan berhasil diubah',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.tindakan')->with($notification);
     }
-    
-    public function cari_tindakan(Request $request){
-        $tindakans = DB::table('pasiens')->where('nama', 'like', "%$request->keyword%")->join('tindakan', 'pasien.id', '=', 'tindakan.id_pasien')->select('pasiens.nama', 'tindakans.*')->get();
-        return view('admin.cari_tindakan', ['tindakans' => $tindakans, 'keyword' => $request->keyword]);
+
+    public function get_tindakan($id)
+    {
+        $tindakan = Tindakan::findOrFail($id);
+        return response()->json($tindakan);
     }
+
 }

@@ -214,12 +214,20 @@
                       <li class="nav-header">DATA MASTER</li>
                       <li class="nav-item">
                           <a href="{{ route('admin.pasien') }}" class="nav-link">
-                              <i class="nav-icon far fa-user"></i>
+                              <i class="nav-icon fas fa-user"></i>
                               <p>
                                   pasien
                               </p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                        <a href="{{ route('admin.tindakan') }}" class="nav-link">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>
+                                Tindakan
+                            </p>
+                        </a>
+                    </li>
                       <li class="nav-header">DATA TRANSAKSI</li>
                       <li class="nav-item">
                           <a href="{{ route('admin.pasien') }}" class="nav-link">

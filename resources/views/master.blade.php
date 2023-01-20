@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
     {{-- <link rel="stylesheet" href="sweetalert2.min.css"> --}}
@@ -54,6 +55,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets') }}/dist/js/demo.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     {{-- <script src="sweetalert2.min.js"></script> --}}
     <script>
         // Swal.bindClickHandler()
@@ -116,7 +118,7 @@
                 @endforeach
             @endif
 
-            // $('#table-data').DataTable();
+        $('#table-data').DataTable();
         // Swal.mixin({
         // toast: true,
         // }).bindClickHandler('data-swal-toast-template')

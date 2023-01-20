@@ -33,7 +33,6 @@
                     <td>{{$pasien->nama_ibu}}</td>
                     <td>{{$pasien->jenis_kelamin}}</td>
                     <td>{{$pasien->tanggal_daftar}}</td>
-                    
                 </tr>
             @endforeach
         </tbody>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\HomeController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\TindakanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,13 +58,16 @@ Route::get('admin/books/export',[PasienController::class,'export'])
 
 
 //crud tindakan
-Route::get('/tambah_tindakan', [TindakanController::class, 'tambah_tindakan'])->middleware('admin');
-Route::post('/store_tindakan', [TindakanController::class, 'store_tindakan'])->middleware('admin');
-Route::post('/hapus_tindakan', [TindakanController::class, 'hapus_tindakan'])->middleware('admin');
-Route::get('/edit_tindakan/{id}', [TindakanController::class, 'edit_tindakan'])->middleware('admin');
-Route::post('/update_tindakan', [TindakanController::class, 'update_tindakan'])->middleware('admin');
-Route::post('/cari_tindakan', [TindakanController::class, 'cari_tindakan']);
-
+Route::get('/tindakan',[TindakanController::class, 'index'])->name('admin.tindakan');
+// ->middleware('admin');
+Route::post('/store_tindakan', [TindakanController::class, 'store_tindakan'])->name('tambah.tindakan');
+// ->middleware('admin');
+Route::post('/hapus_tindakan/{id}', [TindakanController::class, 'hapus_tindakan']);
+// ->middleware('admin');
+Route::get('/get_tindakan/{id}', [TindakanController::class, 'get_tindakan']);
+// ->middleware('admin');
+Route::patch('/update_tindakan', [TindakanController::class, 'update_tindakan'])->name('ubah.tindakan');
+// ->middleware('admin');
 
 
 
