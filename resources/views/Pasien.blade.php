@@ -28,6 +28,7 @@
                     </button>
                     <a href="{{ route('admin.print.pasiens') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
                     <a href="{{ route('admin.print.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
+                    <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a>
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">
@@ -211,6 +212,35 @@
             </div>
         </div>
     </div>
+
+    
+<!-- modal import data form -->
+<div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">import data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{route('admin.print.import') }}" enctype="multipart/form-data">
+                    @csrf 
+                    <div class="form-group">
+                        <label for="cover">upload file</label>
+                        <input type="file" class="form-control" name="file"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                        <button type="submit" class="btn btn-primary">import data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </section>
 @stop
     @push('js')
