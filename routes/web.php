@@ -55,6 +55,42 @@ Route::get('admin/books/export',[PasienController::class,'export'])
 ->name('admin.print.export');
 // ->middleware('is_admin');
 
+Route::get('admin/books/import',[PasienController::class,'import'])
+->name('admin.print.import');
+// ->middleware('is_admin');
+
+
+//PENGELOLAAN KARYAWAN
+Route::get('admin/karyawan',[PasienController::class,'karyawans'])
+->name('admin.karyawan');
+// ->middleware('is_admin');
+Route::post('admin/karyawan',[PasienController::class,'submit_karyawan'])
+->name('admin.karyawan.submit');
+// ->middleware('is_admin');
+
+
+Route::patch('admin/karyawans/update',[PasienController::class,'update_karyawan'])
+->name('admin.karyawan.update');
+// ->middleware('is_admin');
+
+Route::get('admin/ajaxadmin/dataKaryawan/{id}',[PasienController::class,'getDataKaryawan']);
+
+Route::delete('admin/karyawans/delete/{id}',[PasienController::class,'delete_karyawan'])
+->name('karyawan.delete');
+// ->middleware('is_admin');
+
+Route::get('admin/print_karyawans',[PasienController::class,'print_karyawans'])
+->name('admin.print.karyawans');
+// ->middleware('is_admin');
+
+Route::get('admin/karyawans/export',[PasienController::class,'export'])
+->name('admin.print.export');
+// ->middleware('is_admin');
+
+Route::get('admin/books/import',[PasienController::class,'import'])
+->name('admin.print.import');
+// ->middleware('is_admin');
+
 
 
 //crud tindakan

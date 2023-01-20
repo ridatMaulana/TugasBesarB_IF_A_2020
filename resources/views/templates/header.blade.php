@@ -221,6 +221,14 @@
                           </a>
                       </li>
                       <li class="nav-item">
+                          <a href="{{ route('admin.karyawan') }}" class="nav-link">
+                              <i class="nav-icon far fa-user"></i>
+                              <p>
+                                  karyawan
+                              </p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
                         <a href="{{ route('admin.tindakan') }}" class="nav-link">
                             <i class="nav-icon far fa-user"></i>
                             <p>
