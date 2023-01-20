@@ -22,7 +22,7 @@
             <div class="card card-default">
                 <div class="card-header">{{ __('Pengelolaan Karyawan') }}</div>
                 <div class="card-body">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#tambahPasien">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKaryawan">
                         <i class="fa fa-plus"></i>
                         Tambah Data
                     </button>
@@ -52,7 +52,7 @@
                                     <td>{{ $karyawan->alamat }}</td>
                                     <td>{{ $karyawan->no_telepon }}</td>
                                     <td>{{ $karyawan->jabatan }}</td>
-                                    <td>{{ $karyawan->spesialis }}</td>
+                                    <td>{{ $karyawan->spesialis->nama }}</td>
                                     <td>
                                         <button class="btn btn-warning" id="edit-karyawan" data-toggle="modal" data-target="#editKaryawan" onclick="edit({{ $karyawan->id }})">
                                             <i class="fa fa-pencil-alt"></i>
@@ -88,21 +88,28 @@
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required>
+                            <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="no_telepon">No Telepon</label>
-                            <textarea name="no_telepon" id="no_telepon" class="form-control"></textarea>
+                            <input type="number" class="form-control" name="no_telepon" id="no_telepon" required>
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" class="form-control" name="jabatan" id="jabatan" required>
+                            <select name="jabatan" id="jabatan" class="form-control">
+                                <option value="Dokter">Dokter</option>
+                                <option value="Admin">Admin</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="spesialis">Spesialis</label>
-                            <input type="text" class="form-control" name="spesialis" id="spesialis" required>
+                            <select name="spesialis" id="spesialis" class="form-control">
+                                @foreach ($spesialis as $spel)
+                                <option value="{{ $spel->id }}">{{ $spel->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                       
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Kirim</button>
@@ -136,7 +143,7 @@
                         </div>
                         <div class="form-group">
                             <label for="no_telepon">No Telepon</label>
-                            <input type="text" class="form-control" name="no_telepon" id="edit-nama_ibu" required>
+                            <input type="number" class="form-control" name="no_telepon" id="edit-no_telepon" required>
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
@@ -144,7 +151,11 @@
                         </div>
                         <div class="form-group">
                             <label for="spesialis">Spesialis</label>
-                            <input type="text" class="form-control" name="spesialis" id="edit-spesialis" required>
+                            <select name="spesialis" id="edit-spesialis" class="form-control">
+                                @foreach ($spesialis as $spel)
+                                <option value="{{ $spel->id }}">{{ $spel->nama }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="id" id="edit-id">
@@ -157,7 +168,7 @@
         </div>
     </div>
 
-    
+
 <!-- modal import data form -->
 <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -170,7 +181,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="{{route('admin.print.import') }}" enctype="multipart/form-data">
-                    @csrf 
+                    @csrf
                     <div class="form-group">
                         <label for="cover">upload file</label>
                         <input type="file" class="form-control" name="file"/>
@@ -201,7 +212,8 @@
                             $('#edit-alamat').val(res.alamat);
                             $('#edit-tanggal_lahir').val(res.tanggal_lahir);
                             $('#edit-jabatan').val(res.jabatan);
-                            $('#edit-spesialis').val(res.spesialis);
+                            $('#edit-no_telepon').val(res.no_telepon);
+                            $('#edit-spesialis').val(res.spesialis_id);
                             $('#edit-id').val(res.id);
 
                         },

@@ -172,7 +172,7 @@
           </a>
 
           <!-- Sidebar -->
-          <div class="sidebar">
+          <div class="sidebar sidebar-no-expand">
               <!-- Sidebar user (optional) -->
               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                   <div class="image">
@@ -237,13 +237,13 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ route('diagnosa.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-notes-medical"></i>
-                            <p>
-                                Diagnosa
-                            </p>
-                        </a>
-                    </li>
+                          <a href="{{ route('diagnosa.index') }}" class="nav-link">
+                              <i class="nav-icon fas fa-notes-medical"></i>
+                              <p>
+                                  Diagnosa
+                              </p>
+                          </a>
+                      </li>
                       <li class="nav-item">
                           <a href="{{ route('obat.index') }}" class="nav-link">
                               <i class="nav-icon fas fa-pills"></i>

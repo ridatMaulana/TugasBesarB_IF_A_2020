@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\HomeController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TindakanController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\ObatController;
@@ -57,39 +58,39 @@ Route::get('admin/books/export',[PasienController::class,'export'])
 ->name('admin.print.export');
 // ->middleware('is_admin');
 
-Route::get('admin/books/import',[PasienController::class,'import'])
+Route::get('admin/pasien/import',[PasienController::class,'import'])
 ->name('admin.print.import');
 // ->middleware('is_admin');
 
 
 //PENGELOLAAN KARYAWAN
-Route::get('admin/karyawan',[PasienController::class,'karyawans'])
+Route::get('admin/karyawan',[KaryawanController::class,'karyawans'])
 ->name('admin.karyawan');
 // ->middleware('is_admin');
-Route::post('admin/karyawan',[PasienController::class,'submit_karyawan'])
+Route::post('admin/karyawan',[KaryawanController::class,'submit_karyawan'])
 ->name('admin.karyawan.submit');
 // ->middleware('is_admin');
 
 
-Route::patch('admin/karyawans/update',[PasienController::class,'update_karyawan'])
+Route::patch('admin/karyawans/update',[KaryawanController::class,'update_karyawan'])
 ->name('admin.karyawan.update');
 // ->middleware('is_admin');
 
-Route::get('admin/ajaxadmin/dataKaryawan/{id}',[PasienController::class,'getDataKaryawan']);
+Route::get('admin/ajaxadmin/dataKaryawan/{id}',[KaryawanController::class,'getDataKaryawan']);
 
-Route::delete('admin/karyawans/delete/{id}',[PasienController::class,'delete_karyawan'])
+Route::delete('admin/karyawans/delete/{id}',[KaryawanController::class,'delete_karyawan'])
 ->name('karyawan.delete');
 // ->middleware('is_admin');
 
-Route::get('admin/print_karyawans',[PasienController::class,'print_karyawans'])
+Route::get('admin/print_karyawans',[KaryawanController::class,'print_karyawans'])
 ->name('admin.print.karyawans');
 // ->middleware('is_admin');
 
-Route::get('admin/karyawans/export',[PasienController::class,'export'])
+Route::get('admin/karyawans/export',[KaryawanController::class,'export'])
 ->name('admin.print.export');
 // ->middleware('is_admin');
 
-Route::post('admin/pasien/import',[PasienController::class,'import'])
+Route::post('admin/karyawan/import',[KaryawanController::class,'import'])
 ->name('admin.print.import');
 // ->middleware('is_admin');
 
