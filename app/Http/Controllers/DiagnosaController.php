@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Icd;
-
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DiagnosasExport;
 class DiagnosaController extends Controller
 {
     /**
@@ -120,4 +122,16 @@ class DiagnosaController extends Controller
         );
         return redirect()->route('diagnosa.index')->with($notification);
     }
+
+    public function print_diagnosas(){
+        $diagnosa = Diagnosa::all();
+
+        $pdf = PDF::loadview('print_diagnosas',['diagnosas'=>$diagnosa]);
+        return $pdf->download('data_diagnosa.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new DiagnosasExport, 'diagnosas.xlsx');
+    }
+
 }

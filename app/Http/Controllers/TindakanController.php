@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Tindakan;
+use PDF;
 
 class TindakanController extends Controller
 {
@@ -76,5 +77,17 @@ class TindakanController extends Controller
         $tindakan = Tindakan::findOrFail($id);
         return response()->json($tindakan);
     }
+
+    public function print_tindakans(){
+        $tindakans = Tindakan::all();
+
+        $pdf = PDF::loadview('print_tindakans',['tindakans'=>$tindakans]);
+        return $pdf->download('data_tindakan.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new TindakansExport, 'tindakans.xlsx');
+    }
+
 
 }
