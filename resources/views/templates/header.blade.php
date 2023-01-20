@@ -220,6 +220,14 @@
                               </p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="{{ route('admin.karyawan') }}" class="nav-link">
+                              <i class="nav-icon far fa-user"></i>
+                              <p>
+                                  karyawan
+                              </p>
+                          </a>
+                      </li>
                       <li class="nav-header">DATA TRANSAKSI</li>
                       <li class="nav-item">
                           <a href="{{ route('admin.pasien') }}" class="nav-link">
