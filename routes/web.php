@@ -107,9 +107,29 @@ Route::get('/get_tindakan/{id}', [TindakanController::class, 'get_tindakan']);
 // ->middleware('admin');
 Route::patch('/update_tindakan', [TindakanController::class, 'update_tindakan'])->name('ubah.tindakan');
 // ->middleware('admin');
+Route::get('admin/print_tindakans',[TindakanController::class,'print_tindakans'])
+->name('admin.print.tindakans');
+// ->middleware('is_admin');
 
+Route::get('admin/book/export',[TindakanController::class,'export'])
+->name('admin.print.export');
+// ->middleware('is_admin');
+
+
+//crud diagnosa
 Route::patch('diagnosa/update',[DiagnosaController::class,'change'])->name('diagnosa.change');
 Route::resource('/diagnosa', DiagnosaController::class);
+
+Route::get('admin/print_diagnosas',[DiagnosaController::class,'print_diagnosas'])
+->name('admin.print.diagnosas');
+// ->middleware('is_admin');
+
+Route::get('admin/diagnosas/export',[DiagnosaController::class,'export'])
+->name('admin.print.export');
+// ->middleware('is_admin');
+
+
+
 
 Route::patch('obat/update',[ObatController::class,'change'])->name('obat.change');
 Route::resource('/obat', ObatController::class);

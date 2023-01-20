@@ -26,8 +26,8 @@
                         <i class="fa fa-plus"></i>
                         Tambah Data
                     </button>
-                    {{-- <a href="{{ route('admin.print.obats') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
-                    <a href="{{ route('admin.print.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a> --}}
+                    <a href="{{ route('admin.print.obats') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
+                    <a href="{{ route('admin.print.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">

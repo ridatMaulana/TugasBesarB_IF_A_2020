@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Obat;
 use App\Models\Icd;
+use PDF;
 
 class ObatController extends Controller
 {
@@ -129,5 +130,15 @@ class ObatController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('obat.index')->with($notification);
+    }
+    public function print_obats(){
+        $obats = Obat::all();
+
+        $pdf = PDF::loadview('print_obats',['obats'=>$obats]);
+        return $pdf->download('data_obat.pdf');
+    }
+
+    public function export(){
+        return Excel::download(new ObatsExport, 'obats.xlsx');
     }
 }

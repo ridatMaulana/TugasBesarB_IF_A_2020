@@ -251,9 +251,7 @@
                                 }
                             },
                         });
-                    } else {
-                        e.dismiss;
-                    }
+                    } e
                 }, (dismiss) => {
                     return false;
                 });
