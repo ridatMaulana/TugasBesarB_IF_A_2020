@@ -9,10 +9,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Tindakan;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TindakansExport;
+use App\Imports\TindakansImport;
 use PDF;
 
 class TindakanController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data['tindakans'] = Tindakan::all();

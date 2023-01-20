@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Obat;
-use App\Models\Icd;
-use PDF;
+use App\Models\Spesialis;
 
-class ObatController extends Controller
+class SpesialisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +18,8 @@ class ObatController extends Controller
 
     public function index()
     {
-        $data['obats'] = Obat::all();
-        $data['diagnosas'] = Icd::all();
-        return view('obat')->with($data);
+        $data['spesialiss'] = Spesialis::all();
+        return view('spesialis')->with($data);
     }
 
     /**
@@ -44,23 +41,19 @@ class ObatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'icds_id' => 'required',
-            'nama_obat' => 'required',
-            'harga_obat' => 'required|numeric',
+            'nama' => 'required'
             ]);
 
         //cek pasien apakah ada di database
-        $obat = new obat;
-        $obat->icds_id = $request->get('icds_id');
-        $obat->nama_obat = $request->get('nama_obat');
-        $obat->harga_obat = $request->get('harga_obat');
-        $obat->save();
+        $spesialis = new Spesialis;
+        $spesialis->nama = $request->get('nama');
+        $spesialis->save();
 
         $notification = array(
-            'message' => 'Data Obat Berhasil Ditambahkan',
+            'message' => 'Data Spesialis Berhasil Ditambahkan',
             'alert-type' => 'success'
         );
-        return redirect()->route('obat.index')->with($notification);
+        return redirect()->route('spesialis.index')->with($notification);
     }
 
     /**
@@ -71,8 +64,8 @@ class ObatController extends Controller
      */
     public function show($id)
     {
-        $obat = Obat::findOrFail($id);
-        return response()->json($obat);
+        $spesialiss = Spesialis::findOrFail($id);
+        return response()->json($spesialiss);
     }
 
     /**
@@ -106,43 +99,29 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
-        $obat = Obat::findOrFail($id);
-        $obat->delete();
+        $spesialis = Spesialis::findOrFail($id);
+        $spesialis->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Data Obat Berhasil Dihapus',
+            'message' => 'Data Spesialis Berhasil Dihapus',
         ]);
     }
 
     public function change(Request $request)
     {
         $request->validate([
-            'icds_id' => 'required',
-            'nama_obat' => 'required',
-            'harga_obat' => 'required|numeric',
+            'nama' => 'required'
             ]);
 
         //cek pasien apakah ada di database
-        $obat = obat::findOrFail($request->get('id'));
-        $obat->icds_id = $request->get('icds_id');
-        $obat->nama_obat = $request->get('nama_obat');
-        $obat->harga_obat = $request->get('harga_obat');
-        $obat->save();
+        $spesialis = Spesialis::findOrFail($request->get('id'));
+        $spesialis->nama = $request->get('nama');
+        $spesialis->save();
 
         $notification = array(
-            'message' => 'Data Obat Berhasil Diubah',
+            'message' => 'Data Spesialis Berhasil Diubah',
             'alert-type' => 'success'
         );
-        return redirect()->route('obat.index')->with($notification);
-    }
-    public function print_obats(){
-        $obats = Obat::all();
-
-        $pdf = PDF::loadview('print_obats',['obats'=>$obats]);
-        return $pdf->download('data_obat.pdf');
-    }
-
-    public function export(){
-        return Excel::download(new ObatsExport, 'obats.xlsx');
+        return redirect()->route('spesialis.index')->with($notification);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Diagnosa;
+use App\Models\Icd;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -14,7 +14,7 @@ class DiagnosasExport implements  FromArray, WithHeadings, ShouldAutoSize
     */
     public function array():array
     {
-        return Diagnosa::getDataDiagnosas();
+        return Icd::getDataDiagnosas();
     }
 
     public function headings():array

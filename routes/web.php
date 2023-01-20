@@ -8,6 +8,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TindakanController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\SpesialisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +88,7 @@ Route::get('admin/print_karyawans',[KaryawanController::class,'print_karyawans']
 // ->middleware('is_admin');
 
 Route::get('admin/karyawans/export',[KaryawanController::class,'export'])
-->name('admin.print.export');
+->name('admin.karyawans.export');
 // ->middleware('is_admin');
 
 Route::post('admin/karyawan/import',[KaryawanController::class,'import'])
@@ -112,7 +113,7 @@ Route::get('admin/print_tindakans',[TindakanController::class,'print_tindakans']
 // ->middleware('is_admin');
 
 Route::get('admin/book/export',[TindakanController::class,'export'])
-->name('admin.print.export');
+->name('admin.tindakan.export');
 // ->middleware('is_admin');
 
 
@@ -125,7 +126,7 @@ Route::get('admin/print_diagnosas',[DiagnosaController::class,'print_diagnosas']
 // ->middleware('is_admin');
 
 Route::get('admin/diagnosas/export',[DiagnosaController::class,'export'])
-->name('admin.print.export');
+->name('admin.diagnosa.export');
 // ->middleware('is_admin');
 
 
@@ -133,6 +134,10 @@ Route::get('admin/diagnosas/export',[DiagnosaController::class,'export'])
 
 Route::patch('obat/update',[ObatController::class,'change'])->name('obat.change');
 Route::resource('/obat', ObatController::class);
+
+Route::patch('spesialis/update', [SpesialisController::class,'change'])->name('spesialis.change');
+Route::resource('/spesialis', SpesialisController::class);
+
 
 // Route::get('/dashboard', function () {
 //     return view('home');

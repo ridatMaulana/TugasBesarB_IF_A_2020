@@ -1,5 +1,5 @@
 @extends('master')
-@section('title',"Tindakan")
+@section('title',"Spesialis")
 @section('content')
 <section>
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tindakan</h1>
+                        <h1>Spesialis</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Tindakan</li>
+                            <li class="breadcrumb-item active">Spesialis</li>
                         </ol>
                     </div>
                 </div>
@@ -20,20 +20,19 @@
         </section>
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-header">{{ __('Pengelolaan Tindakan') }}</div>
+                <div class="card-header">{{ __('Pengelolaan Spesialis') }}</div>
                 <div class="card-body">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#tambahtindakan">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#tambahspesialis">
                         <i class="fa fa-plus"></i>
                         Tambah Data
                     </button>
-                    <a href="{{ route('admin.print.tindakans') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
-                    <a href="{{ route('admin.tindakan.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
+                     {{-- <a href="{{ route('admin.print.spes') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
+                    <a href="{{ route('admin.spe.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a> --}}
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">
                                 <th>NO</th>
-                                <th>Nama Tindakan</th>
-                                <th>Harga Tindakan</th>
+                                <th>Nama Spesialis</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -41,17 +40,16 @@
                             @php
                                 $no = 1;
                             @endphp
-                            @foreach($tindakans as $tindakan)
+                            @foreach($spesialiss as $spesialis)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $tindakan->nama_tindakan }}</td>
-                                    <td>{{ $tindakan->harga_tindakan }}</td>
+                                    <td>{{ $spesialis->nama }}</td>
                                     <td>
-                                        <button class="btn btn-warning" id="edit-tindakan" data-toggle="modal" data-target="#editTindakan" onclick="edit({{ $tindakan->id }})">
+                                        <button class="btn btn-warning" id="edit-spesialis" data-toggle="modal" data-target="#editspesialis" onclick="edit({{ $spesialis->id }})">
                                             <i class="fa fa-pencil-alt"></i>
                                         </button>
-                                        <button type="button" title="Hapus tindakan" class="btn btn-danger"
-                                            onclick="deleteConfirm('{{ $tindakan->id }}','{{ $tindakan->nama_tindakan }}')">
+                                        <button type="button" title="Hapus spesialis" class="btn btn-danger"
+                                            onclick="deleteConfirm('{{ $spesialis->id }}','{{ $spesialis->nama }}')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -64,25 +62,21 @@
         </div>
     </div>
 
-    <div class="modal fade" id="tambahtindakan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahspesialis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Tindakan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Spesialis</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('tambah.tindakan') }}" method="post">
+                    <form action="{{ route('spesialis.store') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="nama">Nama Tindakan</label>
-                            <input type="text" class="form-control" name="nama_tindakan" id="nama" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="harga">Harga Tindakan</label>
-                            <input type="number" class="form-control" name="harga_tindakan" id="harga" required>
+                            <label for="nama">Nama Spesialis</label>
+                            <input type="text" class="form-control" name="nama" id="nama" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -94,26 +88,22 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editTindakan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editspesialis" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Tindakan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Spesialis</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('ubah.tindakan') }}" method="post">
+                    <form action="{{ route('spesialis.change') }}" method="post">
                         @csrf
                         @method("PATCH")
                         <div class="form-group">
-                            <label for="nama">Nama Tindakan</label>
-                            <input type="text" class="form-control" name="nama_tindakan" id="edit-nama" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="harga">Harga Tindakan</label>
-                            <input type="number" class="form-control" name="harga_tindakan" id="edit-harga" required>
+                            <label for="nama">Nama Spesialis</label>
+                            <input type="text" class="form-control" name="nama" id="edit-nama" required>
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="id" id="edit-id">
@@ -132,11 +122,10 @@
         function edit(id) {
                     $.ajax({
                         type: "get",
-                        url: "{{ url('/get_tindakan') }}/"+id,
+                        url: "{{ url('/spesialis') }}/"+id,
                         dataType: 'json',
                         success: function (res) {
-                            $('#edit-nama').val(res.nama_tindakan);
-                            $('#edit-harga').val(res.harga_tindakan);
+                            $('#edit-nama').val(res.nama);
                             $('#edit-id').val(res.id);
                         },
                     });
@@ -155,8 +144,8 @@
                     if (e.value === true) {
                         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            type: 'post',
-                            url: "{{ url('/hapus_tindakan') }}/"+npm,
+                            type: 'delete',
+                            url: "{{ url('spesialis') }}/"+npm,
                             data: {
                                 _token: CSRF_TOKEN,
                                 id: npm

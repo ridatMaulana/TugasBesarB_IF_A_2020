@@ -15,7 +15,7 @@ class TindakansExport implements FromArray, WithHeadings, ShouldAutoSize
     */
     public function array():array
     {
-        return Pasien::getDataTindakans();
+        return Tindakan::getDataTindakans();
     }
 
     public function headings():array
@@ -24,7 +24,7 @@ class TindakansExport implements FromArray, WithHeadings, ShouldAutoSize
         'no',
         'nama_tindakan',
         'harga_tindakan',
-       
+
         ];
     }
 }

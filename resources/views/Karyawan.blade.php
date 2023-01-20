@@ -27,7 +27,7 @@
                         Tambah Data
                     </button>
                     <a href="{{ route('admin.print.pasiens') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
-                    <a href="{{ route('admin.print.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
+                    <a href="{{ route('admin.karyawans.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
                     <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a>
                     <table id="table-data" class="table table-bordered">
                         <thead>

@@ -14,6 +14,10 @@ class DiagnosaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data['diagnosas'] = Icd::all();
@@ -124,7 +128,7 @@ class DiagnosaController extends Controller
     }
 
     public function print_diagnosas(){
-        $diagnosa = Diagnosa::all();
+        $diagnosa = Icd::all();
 
         $pdf = PDF::loadview('print_diagnosas',['diagnosas'=>$diagnosa]);
         return $pdf->download('data_diagnosa.pdf');
