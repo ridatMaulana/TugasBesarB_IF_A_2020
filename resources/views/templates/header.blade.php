@@ -229,30 +229,46 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ route('admin.tindakan') }}" class="nav-link">
-                            <i class="nav-icon far fa-user"></i>
+                          <a href="{{ route('admin.tindakan') }}" class="nav-link">
+                              <i class="nav-icon fas fa-notes-medical"></i>
+                              <p>
+                                  Tindakan
+                              </p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('diagnosa.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-notes-medical"></i>
                             <p>
-                                Tindakan
+                                Diagnosa
                             </p>
                         </a>
                     </li>
+                      <li class="nav-item">
+                          <a href="{{ route('obat.index') }}" class="nav-link">
+                              <i class="nav-icon fas fa-pills"></i>
+                              <p>
+                                  Obat
+                              </p>
+                          </a>
+                      </li>
                       <li class="nav-header">DATA TRANSAKSI</li>
                       <li class="nav-item">
                           <a href="{{ route('admin.pasien') }}" class="nav-link">
-                              <i class="nav-icon fas fa-book"></i>
+                              <i class="nav-icon fas fa-book-medical"></i>
                               <p>
                                   Pendaftaran
                               </p>
                           </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ route('admin.pasien') }}" class="nav-link">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Pembayaran
-                            </p>
-                        </a>
-                    </li>
+                          <a href="{{ route('admin.pasien') }}" class="nav-link">
+                              <i class="nav-icon fas fa-book-medical"></i>
+                              <p>
+                                  Pembayaran
+                              </p>
+                          </a>
+                      </li>
                   </ul>
               </nav>
               <!-- /.sidebar-menu -->

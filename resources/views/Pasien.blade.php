@@ -272,8 +272,6 @@
     @push('js')
         <script>
             function edit(id) {
-                    var edit = document.getElementById("edit-pasien");
-                    $('#image-area').empty();
                     $.ajax({
                         type: "get",
                         url: "{{ url('/admin/ajaxadmin/dataPasien') }}/"+id,

@@ -5,6 +5,8 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\HomeController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\TindakanController;
+use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\ObatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,7 +107,11 @@ Route::get('/get_tindakan/{id}', [TindakanController::class, 'get_tindakan']);
 Route::patch('/update_tindakan', [TindakanController::class, 'update_tindakan'])->name('ubah.tindakan');
 // ->middleware('admin');
 
+Route::patch('diagnosa/update',[DiagnosaController::class,'change'])->name('diagnosa.change');
+Route::resource('/diagnosa', DiagnosaController::class);
 
+Route::patch('obat/update',[ObatController::class,'change'])->name('obat.change');
+Route::resource('/obat', ObatController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('home');
