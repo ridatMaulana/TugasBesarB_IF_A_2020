@@ -11,7 +11,7 @@ use App\Models\Pasien;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PasiensExport;
-use App\Import\PasiensImport;
+use App\Imports\PasiensImport;
 
 class PasienController extends Controller
 {
@@ -120,7 +120,7 @@ class PasienController extends Controller
     public function export(){
         return Excel::download(new PasiensExport, 'pasiens.xlsx');
     }
-    
+
     public function import(Request $req)
     {
         Excel::import(new PasiensImport, $req->file('file'));
@@ -130,7 +130,7 @@ class PasienController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('admin.pasiens')->with($notification);
+        return redirect()->route('admin.pasien')->with($notification);
     }
 
     // public function import(Request $req)

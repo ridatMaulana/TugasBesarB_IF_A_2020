@@ -28,7 +28,7 @@
                     </button>
                     <a href="{{ route('admin.print.pasiens') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
                     <a href="{{ route('admin.print.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
-                    <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#import"><i class="fas fa-file-import"></i> Import</button>
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">
@@ -213,7 +213,7 @@
         </div>
     </div>
 
-    
+
 <!-- modal import data form -->
 <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -226,7 +226,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="{{route('admin.print.import') }}" enctype="multipart/form-data">
-                    @csrf 
+                    @csrf
                     <div class="form-group">
                         <label for="cover">upload file</label>
                         <input type="file" class="form-control" name="file"/>
@@ -237,6 +237,32 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import Data Pasien</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.print.import') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="file">Upload File</label>
+                        <input type="file" name="file" id="file" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Import Data</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
