@@ -47,12 +47,12 @@ Route::delete('admin/pasiens/delete/{id}',[PasienController::class,'delete_pasie
 // ->middleware('is_admin');
 
 Route::get('admin/print_pasiens',[PasienController::class,'print_pasiens'])
-->name('admin.print.pasiens')
-->middleware('is_admin');
+->name('admin.print.pasiens');
+// ->middleware('is_admin');
 
 Route::get('admin/books/export',[PasienController::class,'export'])
-->name('admin.print.export')
-->middleware('is_admin');
+->name('admin.print.export');
+// ->middleware('is_admin');
 
 
 

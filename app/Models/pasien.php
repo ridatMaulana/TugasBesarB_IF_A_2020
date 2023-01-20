@@ -26,15 +26,15 @@ class Pasien extends Model
     $pasiens_filter = [];
 
     $no = 1;
-    for ($i=0; $i < $books->count(); $i++) {
+    for ($i=0; $i < $pasiens->count(); $i++) {
         $pasiens_filter[$i]['no'] = $no++;
-        $pasiens_filter[$i]['nama'] = $books[$i]->nama;
-        $pasiens_filter[$i]['tanggal_lahir'] = $books[$i]->tanggal_lahir;
-        $pasiens_filter[$i]['alamat'] = $books[$i]->alamat;
-        $pasiens_filter[$i]['agama'] = $books[$i]->agama;
-        $pasiens_filter[$i]['nama_ibu'] = $books[$i]->nama_ibu;
-        $pasiens_filter[$i]['jenis_kelamin'] = $books[$i]->jenis_kelamin;
-        $pasiens_filter[$i]['tanggal_daftar'] = $books[$i]->tanggal_daftar;
+        $pasiens_filter[$i]['nama'] = $pasiens[$i]->nama;
+        $pasiens_filter[$i]['tanggal_lahir'] = $pasiens[$i]->tanggal_lahir;
+        $pasiens_filter[$i]['alamat'] = $pasiens[$i]->alamat;
+        $pasiens_filter[$i]['agama'] = $pasiens[$i]->agama;
+        $pasiens_filter[$i]['nama_ibu'] = $pasiens[$i]->nama_ibu;
+        $pasiens_filter[$i]['jenis_kelamin'] = $pasiens[$i]->jenis_kelamin;
+        $pasiens_filter[$i]['tanggal_daftar'] = $pasiens[$i]->tanggal_daftar;
     }
     return $pasiens_filter;
 }
