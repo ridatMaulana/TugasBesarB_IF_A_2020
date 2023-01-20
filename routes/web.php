@@ -54,6 +54,10 @@ Route::get('admin/books/export',[PasienController::class,'export'])
 ->name('admin.print.export');
 // ->middleware('is_admin');
 
+Route::get('admin/books/import',[PasienController::class,'import'])
+->name('admin.print.import');
+// ->middleware('is_admin');
+
 
 
 //crud tindakan
