@@ -17,7 +17,7 @@ class CreateObatsTable extends Migration
             $table->id();
             $table->foreignId('icds_id')->constrained();
             $table->string('nama_obat');
-            $table->string('harga_obat');
+            $table->integer('harga_obat');
             $table->timestamps();
         });
     }

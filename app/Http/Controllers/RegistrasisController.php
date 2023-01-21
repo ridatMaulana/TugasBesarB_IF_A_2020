@@ -10,7 +10,7 @@ use App\Models\Karyawan;
 use App\Models\Registrasis;
 use Carbon\Carbon;
 
-class RekammedisesController extends Controller
+class registrasisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,9 @@ class RekammedisesController extends Controller
      */
     public function index()
     {
-        $data['rekams'] = Rekammedises::all();
-        return view('rekammedis.index')->with($data);
+        //
+        $data['registrasis'] = Registrasis::all();
+        return view('registrasi.index')->with($data);
     }
 
     /**
@@ -29,13 +30,12 @@ class RekammedisesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $data['antrians'] = Registrasis::all();
+        // dd($data);
         $data['pasiens'] = Pasien::all();
-        $data['karyawans'] = Karyawan::where('id','>',2)->get();
-        $data['registrasis'] = Registrasis::all();
-        $data['diagnosas'] = Icd::all();
 
-        return view('rekammedis/form')->with($data);
+        return view('registrasi/form')->with($data);
     }
 
     /**
@@ -46,32 +46,26 @@ class RekammedisesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'pasiens_id' => 'required|numeric',
-            'karyawans_id' => 'required|numeric',
-            'registrasis_id' => 'required|numeric',
-            'kode_icd' => 'required|numeric',
-            'keluhan'=> 'required',
-            'tensi' => 'required'
-            ]);
-        $request['tanggal_dibuat'] = Carbon::now();
-        //cek pasien apakah ada di database
-        Rekammedises::create([
-            'pasiens_id' => $request->pasiens_id,
-            'karyawans_id' => $request->karyawans_id,
-            'registrasis_id' => $request->registrasis_id,
-            'kode_icd' => $request->kode_icd,
-            'tanggal_dibuat' => Carbon::now(),
-            'keluhan'=> $request->keluhan,
-            'tensi' => $request->tensi,
-            'alergi' => $request->alergi,
-            'hasil_lab' => $request->hasil_lab,
-            ]);
+        //
+         $request->validate([
+        'pasiens_id' => 'required|numeric',
+        'no_nota'=> 'required',
+        'no_antrian' => 'required',
+        'tanggal_registrasi' => 'required'
+        ]);
+        // dd($request);
+        Registrasis::create([
+            'pasiens_id' => $request->get('pasiens_id'),
+            'no_nota' => $request->get('no_nota'),
+            'no_antrian' => $request->get('no_antrian'),
+            'tanggal_registrasi' => $request->get('tanggal_registrasi')
+        ]);
         $notification = array(
-            'message' => 'Data Spesialis Berhasil Ditambahkan',
+            'message' => 'Data registrasi Berhasil Ditambahkan',
             'alert-type' => 'success'
         );
-        return redirect()->route('rekam.index')->with($notification);
+        return redirect()->route('registrasi.index')->with($notification);
+    
     }
 
     /**
@@ -116,8 +110,9 @@ class RekammedisesController extends Controller
      */
     public function destroy($id)
     {
-        $rekammedises = Rekammedises::findOrFail($id);
-        $rekammedises->delete();
+        //
+        $registrasis = Registrasis::findOrFail($id);
+        $registrasis->delete();
         return response()->json([
             'success' => true,
             'message' => 'Data Berhasil Dihapus',

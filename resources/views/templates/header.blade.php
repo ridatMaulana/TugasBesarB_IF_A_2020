@@ -176,7 +176,7 @@
                     </li>
                       <li class="nav-header">DATA TRANSAKSI</li>
                       <li class="nav-item">
-                          <a href="{{ route('admin.pasien') }}" class="nav-link">
+                          <a href="{{ route('registrasi.index') }}" class="nav-link">
                               <i class="nav-icon fas fa-book-medical"></i>
                               <p>
                                   Pendaftaran

@@ -22,7 +22,7 @@
             <div class="card card-default">
                 <div class="card-header">{{ __('Pengelolaan Rekam Medis') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('obat.store') }}" method="post">
+                    <form action="{{ route('rekam.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="pasien">Nama Pasien</label>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="registrasi">Registrasi</label>
-                            <select name="icds_id" id="registrasi" required class="form-control">
+                            <select name="registrasis_id" id="registrasi" required class="form-control">
                                 @forelse($registrasis as $registrasi)
                                 <option value="{{ $registrasi->id }}">{{ $registrasi->no_antrian }}</option>
                                 @empty
@@ -55,8 +55,12 @@
                             </select>
                         </div>
                         <div class="form-group">
+                        <label for="alamat">keluhan</label>
+                            <textarea name="keluhan" id="keluhan" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="diagnosa">Diagnosa</label>
-                            <select name="icds_id" id="diagnosa" required class="form-control">
+                            <select name="kode_icd" id="diagnosa" required class="form-control">
                                 @forelse($diagnosas as $diagnosa)
                                     <option value="{{ $diagnosa->id }}">{{ $diagnosa->nama_diagnosa }}</option>
                                 @empty
