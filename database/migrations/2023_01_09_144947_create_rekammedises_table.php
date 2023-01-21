@@ -17,6 +17,7 @@ class CreateRekammedisesTable extends Migration
             $table->id();
             $table->foreignId('pasiens_id')->constrained();
             $table->foreignId('karyawans_id')->constrained();
+            $table->foreignId('registraisis_id')->constrained();
             $table->string('kode_icd');
             $table->string('keluhan');
             $table->datetime('tanggal_dibuat');

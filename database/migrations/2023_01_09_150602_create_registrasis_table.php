@@ -15,7 +15,6 @@ class CreateRegistrasisTable extends Migration
     {
         Schema::create('registrasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rekammedises_id')->constrained();
             $table->foreignId('pasiens_id')->constrained();
             $table->string('no_nota');
             $table->string('no_antrian');
