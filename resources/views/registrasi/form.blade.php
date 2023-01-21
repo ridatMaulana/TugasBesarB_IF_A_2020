@@ -47,10 +47,10 @@
                             <!-- <input type="text" class="form-control" name="no_antrian" id="no_antrian" value="1" readonly> -->
                             @endforelse
                         </div>
-                        <div class="form-group">
-                            <label for="tanggal_registrasi">tanggal registrasi</label>
-                            <input type="date" class="form-control" name="tanggal_registrasi" id="tanggal_registrasi">
-                        </div>
+                        <!-- <div class="form-group">
+                            <label for="tanggal_registrasi">tanggal registrasi</label> -->
+                            <input type="hidden" class="form-control" name="tanggal_registrasi" id="tanggal_registrasi">
+                        <!-- </div> -->
                         <div class="modal-footer">
                             <a href="{{ route('registrasi.index') }}" class="btn btn-secondary" data-dismiss="modal">Kembali</a>
                             <button type="submit" class="btn btn-primary">Kirim</button>

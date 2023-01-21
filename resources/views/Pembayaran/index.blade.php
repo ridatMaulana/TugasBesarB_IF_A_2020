@@ -1,5 +1,5 @@
 @extends('master')
-@section('title',"Rekam Medis")
+@section('title',"Pembayaran")
 @section('content')
 <section>
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Rekam Medis</h1>
+                        <h1>Pembayaran</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Rekam Medis</li>
+                            <li class="breadcrumb-item active">Pembayaran</li>
                         </ol>
                     </div>
                 </div>
@@ -20,9 +20,9 @@
         </section>
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-header">{{ __('Pengelolaan Rekam Medis') }}</div>
+                <div class="card-header">{{ __('Pengelolaan Pembayaran') }}</div>
                 <div class="card-body">
-                    <a href="{{ route('rekam.create') }}" class="btn btn-primary">
+                    <a href="{{ route('pembayaran.create') }}" class="btn btn-primary">
                         <i class="fa fa-plus"></i>
                         Tambah Data
                     </a>
@@ -32,13 +32,12 @@
                                 <th>NO</th>
                                 <th>Nama Pasien</th>
                                 <th>Nama Dokter</th>
+                                <th>Obat</th>
+                                <th>Tindakan</th>
+                                <th>Rekam Medis</th>
                                 <th>No Antrian</th>
-                                <th>Diagnosa</th>
-                                <th>Keluhan</th>
-                                <th>Tanggal Rekam Medis</th>
-                                <th>Tensi</th>
-                                <th>Alergi</th>
-                                <th>Hasil Lab</th>
+                                <th>Tanggal Transaksi</th>
+                                <th>Biaya</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -46,25 +45,24 @@
                             @php
                                 $no = 1;
                             @endphp
-                            @foreach($rekams as $rekam)
+                            @foreach($bayars as $bayar)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $rekam->pasiens->nama }}</td>
-                                    <td>{{ $rekam->karyawans->nama }}</td>
-                                    <td>{{ $rekam->registrasis->no_antrian }}</td>
-                                    <td>{{ $rekam->icd->nama_diagnosa }}</td>
-                                    <td>{{ $rekam->keluhan }}</td>
-                                    <td>{{ $rekam->tanggal_dibuat }}</td>
-                                    <td>{{ $rekam->tensi }}</td>
-                                    <td>{{ $rekam->alergi }}</td>
-                                    <td>{{ $rekam->hasil_lab }}</td>
+                                    <td>{{ $bayar->pasiens->nama }}</td>
+                                    <td>{{ $bayar->karyawans->nama }}</td>
+                                    <td>{{ $bayar->obat->nama_obat }}</td>
+                                    <td>{{ $bayar->tindakan->nama_tindakan }}</td>
+                                    <td>{{ $bayar->rekammedises->id }}</td>
+                                    <td>{{ $bayar->no_antrian }}</td>
+                                    <td>{{ $bayar->tanggal_transaksi }}</td>
+                                    <td>{{ $bayar->total_biaya }}</td>
                                     <td>
 
-                                        {{-- <button class="btn btn-warning" id="edit-rekam" data-toggle="modal" data-target="#editRekam" onclick="edit({{ $rekam->id }})">
+                                        {{-- <button class="btn btn-warning" id="edit-pembayaran" data-toggle="modal" data-target="#editpembayaran" onclick="edit({{ $pembayaran->id }})">
                                             <i class="fa fa-pencil-alt"></i>
                                         </button> --}}
-                                        <button type="button" title="Hapus Rekam Medis" class="btn btn-danger"
-                                            onclick="deleteConfirm('{{ $rekam->id }}','{{ $rekam->nama }}')"><i
+                                        <button type="button" title="Hapus Pembayaran" class="btn btn-danger"
+                                            onclick="deleteConfirm('{{ $bayar->id }}','{{ $bayar->nama }}')"><i
                                                 class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
@@ -76,20 +74,20 @@
         </div>
     </div>
 
-    {{-- <div class="modal fade" id="tambahRekam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="tambahpembayaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Rekam</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah pembayaran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.rekam.submit') }}" method="post">
+                    <form action="{{ route('admin.pembayaran.submit') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="nama">Nama Rekam Medis</label>
+                            <label for="nama">Nama Pembayaran</label>
                             <input type="text" class="form-control" name="nama" id="nama" required>
                         </div>
                         <div class="form-group">
@@ -126,21 +124,21 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editRekam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editpembayaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Rekam Medis</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Pembayaran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.rekam.update') }}" method="post">
+                    <form action="{{ route('admin.pembayaran.update') }}" method="post">
                         @csrf
                         @method("PATCH")
                         <div class="form-group">
-                            <label for="nama">Nama Rekam</label>
+                            <label for="nama">Nama pembayaran</label>
                             <input type="text" class="form-control" name="nama" id="edit-nama" required>
                         </div>
                         <div class="form-group">
@@ -207,11 +205,11 @@
     @push('js')
         <script>
             // function edit(id) {
-            //         var edit = document.getElementById("edit-Rekam");
+            //         var edit = document.getElementById("edit-pembayaran");
             //         $('#image-area').empty();
             //         $.ajax({
             //             type: "get",
-            //             url: "{{ url('/admin/ajaxadmin/dataRekam') }}/"+id,
+            //             url: "{{ url('/admin/ajaxadmin/datapembayaran') }}/"+id,
             //             dataType: 'json',
             //             success: function (res) {
             //                 $('#edit-nama').val(res.nama);
@@ -240,7 +238,7 @@
 
                         $.ajax({
                             type: 'DELETE',
-                            url: "{{ url('/rekam') }}/" + npm,
+                            url: "{{ url('/pembayarans/delete') }}/" + npm,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },

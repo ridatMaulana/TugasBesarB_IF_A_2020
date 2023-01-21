@@ -12,6 +12,7 @@ use App\Models\Icd;
 class Rekammedises extends Model
 {
     use HasFactory;
+    protected $table = 'rekammedises';
     protected $fillable = [
         'pasiens_id',
         'karyawans_id',

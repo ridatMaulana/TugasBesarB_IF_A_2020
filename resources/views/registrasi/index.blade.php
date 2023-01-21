@@ -101,7 +101,7 @@
 
                         $.ajax({
                             type: 'DELETE',
-                            url: "{{ url('/registrasi/delete') }}/" + npm,
+                            url: "{{ url('/registrasi') }}/" + npm,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
