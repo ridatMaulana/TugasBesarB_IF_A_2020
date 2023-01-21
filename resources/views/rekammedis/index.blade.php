@@ -1,5 +1,5 @@
 @extends('master')
-@section('title',"Karyawan")
+@section('title',"Rekam Medis")
 @section('content')
 <section>
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Karyawan</h1>
+                        <h1>Rekam Medis</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Karyawan</li>
+                            <li class="breadcrumb-item active">Rekam Medis</li>
                         </ol>
                     </div>
                 </div>
@@ -20,24 +20,28 @@
         </section>
         <div class="container-fluid">
             <div class="card card-default">
-                <div class="card-header">{{ __('Pengelolaan Karyawan') }}</div>
+                <div class="card-header">{{ __('Pengelolaan Rekam Medis') }}</div>
                 <div class="card-body">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKaryawan">
+                    {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahRekam">
                         <i class="fa fa-plus"></i>
                         Tambah Data
                     </button>
                     <a href="{{ route('admin.print.pasiens') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
-                    <a href="{{ route('admin.karyawans.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
-                    <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a>
+                    <a href="{{ route('admin.rekams.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
+                    <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a> --}}
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">
                                 <th>NO</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>No Telepon</th>
-                                <th>Jabatan</th>
-                                <th>Spesialis</th>
+                                <th>Nama Pasien</th>
+                                <th>Nama Dokter</th>
+                                <th>Tanggal Registrasi</th>
+                                <th>Diagnosa</th>
+                                <th>Keluahan</th>
+                                <th>Tanggal Rekam Medis</th>
+                                <th>Tensi</th>
+                                <th>Alergi</th>
+                                <th>Hasil Lab</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -45,21 +49,25 @@
                             @php
                                 $no = 1;
                             @endphp
-                            @foreach($karyawans as $karyawan)
+                            @foreach($rekams as $rekam)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $karyawan->nama }}</td>
-                                    <td>{{ $karyawan->alamat }}</td>
-                                    <td>{{ $karyawan->no_telepon }}</td>
-                                    <td>{{ $karyawan->jabatan }}</td>
-                                    <td>{{ $karyawan->spesialis->nama }}</td>
+                                    <td>{{ $rekam->pasiens->nama }}</td>
+                                    <td>{{ $rekam->karyawans->nama }}</td>
+                                    <td>{{ $rekam->registrasis->tanggal_registrasi }}</td>
+                                    <td>{{ $rekam->icds->nama_diagnosa }}</td>
+                                    <td>{{ $rekam->keluhan }}</td>
+                                    <td>{{ $rekam->tanggal_dibuat }}</td>
+                                    <td>{{ $rekam->tensi }}</td>
+                                    <td>{{ $rekam->alergi }}</td>
+                                    <td>{{ $rekam->hasil_lab }}</td>
                                     <td>
-                                        <button class="btn btn-warning" id="edit-karyawan" data-toggle="modal" data-target="#editKaryawan" onclick="edit({{ $karyawan->id }})">
+                                        {{-- <button class="btn btn-warning" id="edit-rekam" data-toggle="modal" data-target="#editRekam" onclick="edit({{ $rekam->id }})">
                                             <i class="fa fa-pencil-alt"></i>
                                         </button>
-                                        <button type="button" title="Hapus Karyawan" class="btn btn-danger"
-                                            onclick="deleteConfirm('{{ $karyawan->id }}','{{ $karyawan->nama }}')"><i
-                                                class="fas fa-trash"></i></button>
+                                        <button type="button" title="Hapus Rekam Medis" class="btn btn-danger"
+                                            onclick="deleteConfirm('{{ $rekam->id }}','{{ $rekam->nama }}')"><i
+                                                class="fas fa-trash"></i></button> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -70,20 +78,20 @@
         </div>
     </div>
 
-    <div class="modal fade" id="tambahKaryawan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="tambahRekam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Karyawan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Rekam</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.karyawan.submit') }}" method="post">
+                    <form action="{{ route('admin.rekam.submit') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="nama">Nama Karyawan</label>
+                            <label for="nama">Nama Rekam Medis</label>
                             <input type="text" class="form-control" name="nama" id="nama" required>
                         </div>
                         <div class="form-group">
@@ -120,21 +128,21 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editKaryawan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editRekam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Karyawan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Rekam Medis</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.karyawan.update') }}" method="post">
+                    <form action="{{ route('admin.rekam.update') }}" method="post">
                         @csrf
                         @method("PATCH")
                         <div class="form-group">
-                            <label for="nama">Nama Karyawan</label>
+                            <label for="nama">Nama Rekam</label>
                             <input type="text" class="form-control" name="nama" id="edit-nama" required>
                         </div>
                         <div class="form-group">
@@ -194,68 +202,68 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 </section>
 @stop
     @push('js')
         <script>
-            function edit(id) {
-                    var edit = document.getElementById("edit-karyawan");
-                    $('#image-area').empty();
-                    $.ajax({
-                        type: "get",
-                        url: "{{ url('/admin/ajaxadmin/dataKaryawan') }}/"+id,
-                        dataType: 'json',
-                        success: function (res) {
-                            $('#edit-nama').val(res.nama);
-                            $('#edit-alamat').val(res.alamat);
-                            $('#edit-tanggal_lahir').val(res.tanggal_lahir);
-                            $('#edit-jabatan').val(res.jabatan);
-                            $('#edit-no_telepon').val(res.no_telepon);
-                            $('#edit-spesialis').val(res.spesialis_id);
-                            $('#edit-id').val(res.id);
+            // function edit(id) {
+            //         var edit = document.getElementById("edit-Rekam");
+            //         $('#image-area').empty();
+            //         $.ajax({
+            //             type: "get",
+            //             url: "{{ url('/admin/ajaxadmin/dataRekam') }}/"+id,
+            //             dataType: 'json',
+            //             success: function (res) {
+            //                 $('#edit-nama').val(res.nama);
+            //                 $('#edit-alamat').val(res.alamat);
+            //                 $('#edit-tanggal_lahir').val(res.tanggal_lahir);
+            //                 $('#edit-jabatan').val(res.jabatan);
+            //                 $('#edit-no_telepon').val(res.no_telepon);
+            //                 $('#edit-spesialis').val(res.spesialis_id);
+            //                 $('#edit-id').val(res.id);
 
-                        },
-                    });
-                }
+            //             },
+            //         });
+            //     }
 
-            function deleteConfirm(npm, judul) {
-                swal.fire({
-                    title: "Hapus??",
-                    icon: 'warning',
-                    text: "Apakah anda yakin ingin menghapus data dengan judul " + judul + "?!",
-                    showCancelButton: !0,
-                    confirmButtonText: "Ya, lakukan!!",
-                    cancelButtonText: "Tidak, Batalkan!!",
-                    reverseButtons: !0,
-                }).then((e) => {
-                    if (e.value === true) {
+            // function deleteConfirm(npm, judul) {
+            //     swal.fire({
+            //         title: "Hapus??",
+            //         icon: 'warning',
+            //         text: "Apakah anda yakin ingin menghapus data dengan judul " + judul + "?!",
+            //         showCancelButton: !0,
+            //         confirmButtonText: "Ya, lakukan!!",
+            //         cancelButtonText: "Tidak, Batalkan!!",
+            //         reverseButtons: !0,
+            //     }).then((e) => {
+            //         if (e.value === true) {
 
-                        $.ajax({
-                            type: 'DELETE',
-                            url: "{{ url('admin/karyawans/delete') }}/" + npm,
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            Type: 'JSON',
-                            success: (result) => {
-                                if (result.success === true) {
-                                    swal.fire("Done!", result.message, "success");
+            //             $.ajax({
+            //                 type: 'DELETE',
+            //                 url: "{{ url('admin/rekams/delete') }}/" + npm,
+            //                 headers: {
+            //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //                 },
+            //                 Type: 'JSON',
+            //                 success: (result) => {
+            //                     if (result.success === true) {
+            //                         swal.fire("Done!", result.message, "success");
 
-                                    setTimeout(() => {
-                                        location.reload();
-                                    }, 1000);
-                                } else {
-                                    swal.fire("Error!", result.message, "error");
-                                }
-                            },
-                        });
-                    } e
-                }, (dismiss) => {
-                    return false;
-                });
-            }
+            //                         setTimeout(() => {
+            //                             location.reload();
+            //                         }, 1000);
+            //                     } else {
+            //                         swal.fire("Error!", result.message, "error");
+            //                     }
+            //                 },
+            //             });
+            //         } e
+            //     }, (dismiss) => {
+            //         return false;
+            //     });
+            // }
 
         </script>
     @endpush

@@ -12,7 +12,7 @@ class Tindakan extends Model
     protected $fillable = [
         'nama_tindakan',
         'harga_tindakan',
-        
+
     ];
 
     public static function getDataTindakans()
@@ -23,10 +23,10 @@ class Tindakan extends Model
 
     $no = 1;
     for ($i=0; $i < $tindakans->count(); $i++) {
-        $pasiens_filter[$i]['no'] = $no++;
-        $tindakans_filter[$i]['nama_tindakan'] = $tindakans[$i]->nama;
-        $tindakans_filter[$i]['harga_tidakan'] = $tindakans[$i]->nama;
-       
+        $tindakans_filter[$i]['no'] = $no++;
+        $tindakans_filter[$i]['nama_tindakan'] = $tindakans[$i]->nama_tindakan;
+        $tindakans_filter[$i]['harga_tindakan'] = $tindakans[$i]->harga_tindakan;
+
     }
     return $tindakans_filter;
 }

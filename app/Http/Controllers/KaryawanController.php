@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
 use App\Models\Karyawan;
+use App\Models\User;
+use App\Models\Spesialis;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\KaryawansExport;
@@ -26,8 +28,9 @@ class KaryawanController extends Controller
 
     public function karyawans(){
         $user = Auth::user();
-        $karyawans = Karyawan::all();
-        return view('karyawan', compact('user', 'karyawans'));
+        $karyawans = Karyawan::where('id','>','1')->get();
+        $spesialis = Spesialis::where('id','>','1')->get();
+        return view('karyawan', compact('user', 'karyawans','spesialis'));
     }
 
     public function submit_karyawan(Request $req){
@@ -45,9 +48,24 @@ class KaryawanController extends Controller
         $karyawan->alamat = $req->get('alamat');
         $karyawan->no_telepon = $req->get('no_telepon');
         $karyawan->jabatan = $req->get('jabatan');
-        $karyawan->spesialis =  $req->get('spesialis');
+        $karyawan->spesialis_id = $req->get('spesialis');
 
-        $pasien->save();
+        $karyawan->save();
+
+
+
+        if ($req->get('spesialis') == 2) {
+            $karyawans = Karyawan::all()->last();
+            $user = new User;
+            $user->name = $req->get('nama');
+            $user->username = $req->get('nama')."12345";
+            $user->password = bcrypt("12345678");
+            $user->roles_id = 2;
+            $user->karyawans_id = $karyawans->id;
+            $user->email = $req->get('nama')."@mail.com";
+
+            $user->save();
+        }
 
         $notification = array(
             'message' => 'Data karyawan Berhasil Ditambahkan',
@@ -65,7 +83,6 @@ class KaryawanController extends Controller
 
     public function update_karyawan(Request $req){
         $karyawan = Karyawan::find($req->get('id'));
-
         $validate = $req->validate([
             'nama' => 'required|max:255',
             'alamat' =>'required',
@@ -73,15 +90,13 @@ class KaryawanController extends Controller
             'jabatan' =>'required|max:255',
             'spesialis' => 'required',
         ]);
-
-        $karyawan = new Karyawan;
         $karyawan->nama = $req->get('nama');
         $karyawan->alamat = $req->get('alamat');
         $karyawan->no_telepon = $req->get('no_telepon');
         $karyawan->jabatan = $req->get('jabatan');
-        $karyawan->spesialis =  $req->get('spesialis');
+        $karyawan->spesialis_id =  $req->get('spesialis');
 
-        $pasien->save();
+        $karyawan->save();
 
         $notification = array(
             'message' => 'Data karyawan berhasil diubah',
@@ -116,7 +131,7 @@ class KaryawanController extends Controller
     public function export(){
         return Excel::download(new KaryawansExport, 'karyawans.xlsx');
     }
-    
+
     public function import(Request $req)
     {
         Excel::import(new KaryawansImport, $req->file('file'));

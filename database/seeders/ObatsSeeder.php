@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Icd;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
@@ -18,11 +19,9 @@ class ObatsSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for($i=1; $i<=20; $i++){
             DB::table('obats')->insert([
-                'icds_id' => $faker->name,
+                'icds_id' => rand(1,20),
                 'nama_obat' => $faker->name,
-                'harga_obat' => $faker->name,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'harga_obat' => $faker->numerify('###000')
                 ]);
         }
     }

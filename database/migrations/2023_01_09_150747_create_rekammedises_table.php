@@ -17,6 +17,7 @@ class CreateRekammedisesTable extends Migration
             $table->id();
             $table->foreignId('pasiens_id')->constrained();
             $table->foreignId('karyawans_id')->constrained();
+            $table->unsignedBigInteger('registrasis_id');
             $table->string('kode_icd');
             $table->string('keluhan');
             $table->datetime('tanggal_dibuat');
@@ -24,6 +25,7 @@ class CreateRekammedisesTable extends Migration
             $table->string('alergi');
             $table->string('hasil_lab');
             $table->timestamps();
+            $table->foreign('registrasis_id')->references('id')->on('registrasis');
         });
     }
 

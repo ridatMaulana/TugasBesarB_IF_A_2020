@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegistrasisTable extends Migration
+class CreateKaryawansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRegistrasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('registrasis', function (Blueprint $table) {
+        Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pasiens_id')->constrained();
-            $table->string('no_nota');
-            $table->string('no_antrian');
-            $table->date('tanggal_registrasi');
+            $table->string('nama');
+            $table->string('alamat');
+            $table->string('no_telepon');
+            $table->string('jabatan');
+            $table->foreignId('spesialis_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateRegistrasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrasis');
+        Schema::dropIfExists('karyawans');
     }
 }
