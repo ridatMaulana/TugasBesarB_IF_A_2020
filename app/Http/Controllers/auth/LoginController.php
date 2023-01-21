@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\LoginNotification;
 
 class LoginController extends Controller
 {
@@ -24,8 +26,8 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt($credentials)) {
+            Notification::send(Auth::user(), new LoginNotification(Auth::user()));
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
