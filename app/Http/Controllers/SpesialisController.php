@@ -18,7 +18,7 @@ class SpesialisController extends Controller
 
     public function index()
     {
-        $data['spesialiss'] = Spesialis::all();
+        $data['spesialiss'] = Spesialis::where('id','>','1')->get();
         return view('spesialis')->with($data);
     }
 
