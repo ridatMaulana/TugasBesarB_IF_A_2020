@@ -17,7 +17,7 @@ class CreateRegistrasisTable extends Migration
             $table->id();
             $table->foreignId('pasiens_id')->constrained();
             $table->string('no_nota');
-            $table->string('no_antrian');
+            $table->integer('no_antrian');
             $table->date('tanggal_registrasi');
             $table->timestamps();
         });

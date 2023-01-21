@@ -12,7 +12,17 @@ use App\Models\Icd;
 class Rekammedises extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'pasiens_id',
+        'karyawans_id',
+        'registrasis_id',
+        'kode_icd',
+        'keluhan',
+        'tanggal_dibuat',
+        'tensi',
+        'alergi',
+        'hasil_lab'
+    ];
     public function pasiens()
     {
         return $this->belongsTo(Pasien::class, 'pasiens_id');
@@ -30,7 +40,7 @@ class Rekammedises extends Model
 
     public function icd()
     {
-        return $this->belongsTo(Icd::class, 'icds_id');
+        return $this->belongsTo(Icd::class, 'kode_icd');
     }
 
 }

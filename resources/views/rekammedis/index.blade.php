@@ -52,7 +52,7 @@
                                     <td>{{ $rekam->pasiens->nama }}</td>
                                     <td>{{ $rekam->karyawans->nama }}</td>
                                     <td>{{ $rekam->registrasis->no_antrian }}</td>
-                                    <td>{{ $rekam->icds->nama_diagnosa }}</td>
+                                    <td>{{ $rekam->icd->nama_diagnosa }}</td>
                                     <td>{{ $rekam->keluhan }}</td>
                                     <td>{{ $rekam->tanggal_dibuat }}</td>
                                     <td>{{ $rekam->tensi }}</td>

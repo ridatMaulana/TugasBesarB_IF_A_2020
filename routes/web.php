@@ -10,6 +10,7 @@ use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\SpesialisController;
 use App\Http\Controllers\RekammedisesController;
+use App\Http\Controllers\RegistrasisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,6 +141,7 @@ Route::patch('spesialis/update', [SpesialisController::class,'change'])->name('s
 Route::resource('/spesialis', SpesialisController::class);
 
 Route::resource('/rekam', RekammedisesController::class);
+Route::resource('/registrasi', RegistrasisController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('home');

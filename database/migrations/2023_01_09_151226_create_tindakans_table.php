@@ -16,7 +16,7 @@ class CreateTindakansTable extends Migration
         Schema::create('tindakans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_tindakan');
-            $table->string('harga_tindakan'); 
+            $table->integer('harga_tindakan'); 
             $table->timestamps();
         });
     }
