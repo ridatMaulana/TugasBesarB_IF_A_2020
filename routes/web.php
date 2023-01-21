@@ -139,7 +139,7 @@ Route::resource('/obat', ObatController::class);
 Route::patch('spesialis/update', [SpesialisController::class,'change'])->name('spesialis.change');
 Route::resource('/spesialis', SpesialisController::class);
 
-Route::resource('/rekam', Rekammedises::class);
+Route::resource('/rekam', RekammedisesController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('home');
