@@ -22,22 +22,19 @@
             <div class="card card-default">
                 <div class="card-header">{{ __('Pengelolaan Rekam Medis') }}</div>
                 <div class="card-body">
-                    {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahRekam">
+                    <a href="{{ route('rekam.create') }}" class="btn btn-primary">
                         <i class="fa fa-plus"></i>
                         Tambah Data
-                    </button>
-                    <a href="{{ route('admin.print.pasiens') }}" class="btn btn-secondary" target="_blank"><i class="fa fa-print"></i> PDF</a>
-                    <a href="{{ route('admin.rekams.export') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-export"></i> Export</a>
-                    <a href="{{ route('admin.print.import') }}" class="btn btn-info" target="_blank"><i class="fas fa-file-import"></i> import</a> --}}
+                    </a>
                     <table id="table-data" class="table table-bordered">
                         <thead>
                             <tr class="text-center">
                                 <th>NO</th>
                                 <th>Nama Pasien</th>
                                 <th>Nama Dokter</th>
-                                <th>Tanggal Registrasi</th>
+                                <th>No Antrian</th>
                                 <th>Diagnosa</th>
-                                <th>Keluahan</th>
+                                <th>Keluhan</th>
                                 <th>Tanggal Rekam Medis</th>
                                 <th>Tensi</th>
                                 <th>Alergi</th>
@@ -54,7 +51,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $rekam->pasiens->nama }}</td>
                                     <td>{{ $rekam->karyawans->nama }}</td>
-                                    <td>{{ $rekam->registrasis->tanggal_registrasi }}</td>
+                                    <td>{{ $rekam->registrasis->no_antrian }}</td>
                                     <td>{{ $rekam->icds->nama_diagnosa }}</td>
                                     <td>{{ $rekam->keluhan }}</td>
                                     <td>{{ $rekam->tanggal_dibuat }}</td>
@@ -62,12 +59,13 @@
                                     <td>{{ $rekam->alergi }}</td>
                                     <td>{{ $rekam->hasil_lab }}</td>
                                     <td>
+
                                         {{-- <button class="btn btn-warning" id="edit-rekam" data-toggle="modal" data-target="#editRekam" onclick="edit({{ $rekam->id }})">
                                             <i class="fa fa-pencil-alt"></i>
-                                        </button>
+                                        </button> --}}
                                         <button type="button" title="Hapus Rekam Medis" class="btn btn-danger"
                                             onclick="deleteConfirm('{{ $rekam->id }}','{{ $rekam->nama }}')"><i
-                                                class="fas fa-trash"></i></button> --}}
+                                                class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -228,42 +226,42 @@
             //         });
             //     }
 
-            // function deleteConfirm(npm, judul) {
-            //     swal.fire({
-            //         title: "Hapus??",
-            //         icon: 'warning',
-            //         text: "Apakah anda yakin ingin menghapus data dengan judul " + judul + "?!",
-            //         showCancelButton: !0,
-            //         confirmButtonText: "Ya, lakukan!!",
-            //         cancelButtonText: "Tidak, Batalkan!!",
-            //         reverseButtons: !0,
-            //     }).then((e) => {
-            //         if (e.value === true) {
+            function deleteConfirm(npm, judul) {
+                swal.fire({
+                    title: "Hapus??",
+                    icon: 'warning',
+                    text: "Apakah anda yakin ingin menghapus data dengan judul " + judul + "?!",
+                    showCancelButton: !0,
+                    confirmButtonText: "Ya, lakukan!!",
+                    cancelButtonText: "Tidak, Batalkan!!",
+                    reverseButtons: !0,
+                }).then((e) => {
+                    if (e.value === true) {
 
-            //             $.ajax({
-            //                 type: 'DELETE',
-            //                 url: "{{ url('admin/rekams/delete') }}/" + npm,
-            //                 headers: {
-            //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //                 },
-            //                 Type: 'JSON',
-            //                 success: (result) => {
-            //                     if (result.success === true) {
-            //                         swal.fire("Done!", result.message, "success");
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{ url('/rekams/delete') }}/" + npm,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            Type: 'JSON',
+                            success: (result) => {
+                                if (result.success === true) {
+                                    swal.fire("Done!", result.message, "success");
 
-            //                         setTimeout(() => {
-            //                             location.reload();
-            //                         }, 1000);
-            //                     } else {
-            //                         swal.fire("Error!", result.message, "error");
-            //                     }
-            //                 },
-            //             });
-            //         } e
-            //     }, (dismiss) => {
-            //         return false;
-            //     });
-            // }
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 1000);
+                                } else {
+                                    swal.fire("Error!", result.message, "error");
+                                }
+                            },
+                        });
+                    } e
+                }, (dismiss) => {
+                    return false;
+                });
+            }
 
         </script>
     @endpush

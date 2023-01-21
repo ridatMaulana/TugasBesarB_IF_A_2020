@@ -22,8 +22,8 @@ class CreateRekammedisesTable extends Migration
             $table->string('keluhan');
             $table->datetime('tanggal_dibuat');
             $table->string('tensi');
-            $table->string('alergi');
-            $table->string('hasil_lab');
+            $table->string('alergi')->nullable();
+            $table->string('hasil_lab')->nullable();
             $table->timestamps();
             $table->foreign('registrasis_id')->references('id')->on('registrasis');
         });

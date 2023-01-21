@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rekammedises;
+use App\Models\Pasien;
+use App\Models\Icd;
+use App\Models\Karyawan;
+use App\Models\Registrasis;
+use Carbon\Carbon;
 
 class RekammedisesController extends Controller
 {
@@ -25,7 +30,12 @@ class RekammedisesController extends Controller
      */
     public function create()
     {
-        //
+        $data['pasiens'] = Pasien::all();
+        $data['karyawans'] = Karyawan::where('id','>',2)->get();
+        $data['registrasis'] = Registrasis::where('tanggal_registrasi', '=', Carbon::now());
+        $data['diagnosas'] = Icd::all();
+
+        return view('rekammedis/form')->with($data);
     }
 
     /**
@@ -36,7 +46,23 @@ class RekammedisesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pasiens_id' => 'required|numeric',
+            'karyawans_id' => 'required|numeric',
+            'registrasis_id' => 'required|numeric',
+            'kode_icd' => 'required|numeric',
+            'keluhan'=> 'required',
+            'tanggal' => 'required',
+            'tensi' => 'required'
+            ]);
+
+        //cek pasien apakah ada di database
+        Rekammedises::create($request);
+        $notification = array(
+            'message' => 'Data Spesialis Berhasil Ditambahkan',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('rekam.index')->with($notification);
     }
 
     /**
@@ -81,6 +107,11 @@ class RekammedisesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rekammedises = Rekammedises::findOrFail($id);
+        $rekammedises->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus',
+        ]);
     }
 }
