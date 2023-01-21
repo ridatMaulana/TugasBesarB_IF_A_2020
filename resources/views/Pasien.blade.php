@@ -215,31 +215,7 @@
 
 
 <!-- modal import data form -->
-<div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">import data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="{{route('admin.print.import') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="cover">upload file</label>
-                        <input type="file" class="form-control" name="file"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
-                        <button type="submit" class="btn btn-primary">import data</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="modal fade" id="import" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -251,7 +227,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.print.import') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.pasien.import') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="file">Upload File</label>

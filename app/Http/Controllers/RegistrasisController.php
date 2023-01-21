@@ -51,14 +51,14 @@ class registrasisController extends Controller
         'pasiens_id' => 'required|numeric',
         'no_nota'=> 'required',
         'no_antrian' => 'required',
-        'tanggal_registrasi' => 'required'
+        // 'tanggal_registrasi' => 'required'
         ]);
         // dd($request);
         Registrasis::create([
             'pasiens_id' => $request->get('pasiens_id'),
             'no_nota' => $request->get('no_nota'),
             'no_antrian' => $request->get('no_antrian'),
-            'tanggal_registrasi' => $request->get('tanggal_registrasi')
+            'tanggal_registrasi' =>Carbon::now()
         ]);
         $notification = array(
             'message' => 'Data registrasi Berhasil Ditambahkan',

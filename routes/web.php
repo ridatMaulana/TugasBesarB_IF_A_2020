@@ -11,6 +11,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\SpesialisController;
 use App\Http\Controllers\RekammedisesController;
 use App\Http\Controllers\RegistrasisController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +62,8 @@ Route::get('admin/books/export',[PasienController::class,'export'])
 ->name('admin.print.export');
 // ->middleware('is_admin');
 
-Route::get('admin/pasien/import',[PasienController::class,'import'])
-->name('admin.print.import');
+Route::post('admin/pasien/import',[PasienController::class,'import'])
+->name('admin.pasien.import');
 // ->middleware('is_admin');
 
 
@@ -142,6 +143,7 @@ Route::resource('/spesialis', SpesialisController::class);
 
 Route::resource('/rekam', RekammedisesController::class);
 Route::resource('/registrasi', RegistrasisController::class);
+Route::resource('/pembayaran', PembayaranController::class);
 
 // Route::get('/dashboard', function () {
 //     return view('home');
